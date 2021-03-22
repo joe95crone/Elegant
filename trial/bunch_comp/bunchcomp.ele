@@ -1,0 +1,168 @@
+!-----------------------------------------------------------------------------------------------
+! Initial Tracking + Saving of Twiss 
+!-----------------------------------------------------------------------------------------------
+
+&run_setup
+		lattice = bunchcomp.lte
+		default_order = 2
+		use_beamline = bunchcomp
+		p_central = 197 ! 100 MeV gamma
+		sigma = initial_track/i_%s.sig
+		centroid = initial_track/i_%s.cen
+		output = initial_track/i_%s.out
+		final = initial_track/i_%s.fin
+		magnets = initial_track/i_%s.mag
+		parameters = initial_track/i_%s.param
+		random_number_seed = 987654321
+		print_statistics = 1
+&end
+
+&run_control
+		n_steps = 1
+&end
+
+&twiss_output
+	filename = initial_track/i_%s.twi 
+	output_at_each_step = 1
+	matched = 0
+	statistics = 1
+	beta_x = 3.73409, alpha_x = -0.23
+	beta_y = 2.54673, alpha_y =  0.31
+&end
+
+&bunched_beam
+		bunch = initial_track/i_%s.bun
+		n_particles_per_bunch = 1000
+		emit_nx = 0.5e-6
+		emit_ny = 0.5e-6
+		Po = 197
+		sigma_dp = 5e-4
+		use_twiss_command_values=1
+&end
+
+&track &end
+
+!-----------------------------------------------------------------------------------------------
+! Optimization Run
+!-----------------------------------------------------------------------------------------------
+
+&run_setup
+		lattice = bunchcomp.lte
+		default_order = 2
+		use_beamline = bunchcomp
+		p_central = 100
+		final = opt_run/opt_%s.fin
+		random_number_seed = 987654321
+		print_statistics = 1
+&end
+
+&run_control
+		n_steps = 1
+&end
+
+&twiss_output
+	output_at_each_step = 1
+	matched = 0
+	statistics = 1
+	beta_x = 3.73409, alpha_x = -0.23
+	beta_y = 2.54673, alpha_y =  0.31
+&end
+
+&optimization_setup
+	mode = "minimize"
+	target = 1e-6
+	tolerance = 1e-12
+	n_evaluations = 1000
+	n_passes = 10
+	verbose = 1
+&end
+
+&optimization_term
+	term = "etax 0 1e-5 sene"
+&end
+
+&optimization_term
+	term = "etapx 0 1e-5 sene"
+&end
+
+&optimization_term
+	term = "max.betax 5 0.1 segt"
+&end
+
+&optimization_term
+	term = "max.betay 5 0.1 segt"
+&end
+
+&optimization_variable
+	name = QA, item = k1, step_size=1e-2
+&end
+
+&optimization_variable
+	name = QB, item = k1, step_size=1e-2
+&end
+
+&optimization_variable
+	name = Q1, item = k1, step_size=1e-2
+&end
+
+&optimization_variable
+	name = Q2, item = k1, step_size=1e-2
+&end
+
+&optimization_variable
+	name = Q3, item = k1, step_size=1e-2
+&end
+
+&bunched_beam
+        n_particles_per_bunch = 1
+&end
+
+&optimize &end
+
+&save_lattice
+	filename = opt_%s.lte
+&end
+
+!-----------------------------------------------------------------------------------------------
+! Final Tracking + Saving of Twiss (Optimised Run) 
+!-----------------------------------------------------------------------------------------------
+
+&run_setup
+		lattice = opt_bunchcomp.lte
+		default_order = 2
+		use_beamline = bunchcomp
+		p_central = 100
+		sigma = final_track/f_%s.sig
+		centroid = final_track/f_%s.cen
+		output = final_track/f_%s.out
+		final = final_track/f_%s.fin
+		magnets = final_track/f_%s.mag
+		parameters = final_track/f_%s.param
+		random_number_seed = 987654321
+		print_statistics = 1
+&end
+
+&run_control
+		n_steps = 1
+&end
+
+&twiss_output
+	filename = final_track/f_%s.twi 
+	output_at_each_step = 1
+	matched = 0
+	statistics = 1
+	beta_x = 3.73409, alpha_x = -0.23
+	beta_y = 2.54673, alpha_y =  0.31
+&end
+
+&bunched_beam
+		bunch = final_track/f_%s.bun
+		n_particles_per_bunch = 1000
+		emit_nx = 0.5e-6
+		emit_ny = 0.5e-6
+		Po = 197
+		sigma_dp = 5e-4
+		use_twiss_command_values=1
+&end
+
+&track &end

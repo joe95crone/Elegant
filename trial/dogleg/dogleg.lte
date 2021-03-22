@@ -1,0 +1,21 @@
+# 1st Attempt at an Elegant Dogleg
+#---------------------------------------------------
+# DRIFTS
+
+D1:	drift, L=0.2
+D2:	drift, L=0.5
+
+# DIPOLES
+
+B1:	sbend, L=0.2, angle=0.2
+B2:	sbend, L=0.2, angle=-0.2
+
+# QUADRUPOLES 
+
+Q1:	quadrupole, L=0.1, k1=8
+Q2:	quadrupole, L=0.1, k1=-8
+Q3:	quadrupole, L=0.1, k1=8
+
+# DOGLEG BEAMLINE
+
+dogleg: line = (D1, Q1, D1, B1, D2, Q2, D2, D1, Q3, D1)

@@ -1,0 +1,29 @@
+# 1st Attempt at an Elegant Dogleg
+#---------------------------------------------------
+
+# DRIFTS
+
+Ddoub:	drift, L=0.3
+
+D1:	drift, L=0.5
+D2:	drift, L=0.4
+D3:	drift, L=0.2
+
+
+# DIPOLES
+
+B1:	sbend, L=0.2, ANGLE=0.05
+B2:	sbend, L=0.2, ANGLE=-0.05
+
+# QUADRUPOLES
+
+QA:	quadrupole, L=0.2, k1=1
+QB:	quadrupole, L=0.2, k1=-1
+
+Q1:	quadrupole, L=0.2, k1=1
+Q2:	quadrupole, L=0.2, k1=-1
+Q3:	quadrupole, L=0.2, k1=1
+
+# BEAMLINE
+
+bunchcomp: line = (Ddoub, QA, Ddoub, QB, D1, B1, D2, Q1, D2, B2, D3, Q2, D3, B2, D2, Q3, D2, B1, D1)
