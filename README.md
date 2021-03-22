@@ -6,4 +6,8 @@ code and packages required for plotting of floor plans
 
 __Change Log__
 
-[22/03/2021] 
+[22/03/2021] Supplementary code has been added, which includes the elegant Mathematica interpreter and the SDDS Mathematica interpreter. The MAD conversion package seems to be missing...
+
+[22/03/2021] The PERLE V1 and V2 lattice files and their optimisation code, output files etc. have all been uploaded with the shell files that I have created to see the lattice also included.
+
+[22/03/2021] The trial file contains my initial elegant work which includes simple optimisations, tracking and output files to do custom plotting etc. for both a dogleg case and a bunch compressor. This code represents my own personal tutorials.
