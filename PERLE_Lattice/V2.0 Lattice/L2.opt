@@ -1,0 +1,181 @@
+ (500-7)/6;  =>  82.1666667
+  $DE= (500-7)/6/4;  =>  20.5416667
+# Inj
+  $E0=7.0;  =>           7
+  $T0=$E0-$Me;  =>   6.4889966
+  $P0=sqrt($E0*$E0-$Me*$Me);  =>  6.98132334
+  $Hr=$P0*1e11/$c;  =>   23.287188
+#
+  $gamma=1+$E0/$Me;  =>   14.698539
+  $beta=sqrt(1-1/$gamma/$gamma);  => 0.997683005
+ #
+  $EmitN=1e-4;  =>      0.0001
+  $Emit=$EmitN/$gamma/$beta;  =>6.81919731e-06
+#
+# Inj
+#
+ $Ang_deg= 15.;  =>          15
+ $Ang_rad=$Ang_deg*$PI/180;  => 0.261799388
+ $Lmag=15;  =>          15
+ $HalfGap=0..5*2.54/2;  =>           0
+ $Lbend=$Lmag*$Ang_rad/sin($Ang_rad);  =>  15.1727274
+ $Bchic=  $Ang_rad* $Hr/$Lbend;  => 0.401811184
+#
+# Main cavity parameters
+#
+ $c;  =>2.99792458e+10
+ $F=801.58e6;  =>   801580000
+  $Lambda=$c/$F;  =>  37.4001919
+  $LCav=5*$Lambda/2;  =>  93.5004797
+  $Grad = $DE/$LCav*100;  =>  21.9695843
+# Energies
+#
+  $E0;  =>           7
+  4*$DE;  =>  82.1666667
+#
+$E1 =  $E0+1*4*$DE;  =>  89.1666667
+$E2 =  $E0+2*4*$DE;  =>  171.333333
+$E3 = $E0+3*4*$DE;  =>       253.5
+$E4 = $E0+4*4*$DE;  =>  335.666667
+$E5 = $E0+5*4*$DE;  =>  417.833333
+$E6 = $E0+6*4*$DE;  =>         500
+#
+     7;  =>           7
+   89;  =>          89
+  171;  =>         171
+  253;  =>         253
+  335;  =>         335
+  418;  =>         418
+  500;  =>         500
+#
+#
+$Lper = 149.05;  =>      149.05
+#
+$L0=54.954 - $LCav/2;  =>  8.20376016
+$L1=$Lper -$L0 - $LCav;  =>  47.3457602
+#
+$Lend=201.05 - $Lper;  =>          52
+$Lvalve=78.4-$Lend;  =>        26.4
+#
+$Lcryo=753.0;  =>         753
+#
+$Cav="oD1 A1 oD0";
+#
+  $FIdeg=0;  =>           0
+#
+# L2 Chicane
+#
+  $T2=$E2-$Me;  =>   170.82233
+  $P2=sqrt($E2*$E2-$Me*$Me);  =>  171.332571
+  $Hr2=$P2*1e11/$c;  =>  571.503941
+#
+  $Ang2_rad=asin($Bchic*$Lmag/$Hr2);  =>0.0105463481
+  $Ang2_deg=$Ang2_rad*180/$PI;  => 0.604261235
+  $Lbend2=$Lmag*$Ang2_rad/sin($Ang2_rad);  =>  15.0002781
+  $Leff0=$HalfGap;  =>           0
+  $Leff2=$HalfGap*(1.+sin( $Ang2_rad)*sin( $Ang2_rad))/(cos($Ang2_rad)*cos( $Ang2_rad)*cos( $Ang2_rad)) ;  =>           0
+#
+# drift
+$Lchic=80;  =>          80
+$Lstr= ($Lchic-4*$Lmag)/2;  =>          10
+$Lleg2=$Lstr/cos($Ang2_rad);  =>  10.0005562
+#
+978.002/$Lambda;  =>  26.1496519
+1009.805/$Lambda;  =>  26.9999952
+#
+$L01=20;  =>          20
+$L02=30;  =>          30
+$L02a=15;  =>          15
+$L03=25;  =>          25
+$L00=(27-26.1496519)*$Lambda;  =>  31.8031821
+#
+#
+#
+  $gamma=1+$E1/$Me;  =>  175.493294
+  $beta=sqrt(1-1/$gamma/$gamma);  => 0.999983765
+ #
+  $EmitN=1e-4;  =>      0.0001
+  $Emit=$EmitN/$gamma/$beta;  =>5.69831593e-07
+#
+#
+  $FIdeg=0;  =>           0
+# 
+#
+  $T1=$E1-$Me;  =>  88.6556633
+#
+#
+OptiM
+Energy[MeV]=$T1   Mass[MeV]=0.5110034 
+Emittance: ex[cm]=$Emit  ey[cm]=$Emit  DP/P=1e-4
+Initial:	BetaX[cm]=862.824 	BetaY[cm]=862.75
+	AlfaX=0.666022     	AlfaY=0.667505 
+	DispersX[cm]=-2.50999e-06 	DispersY[cm]=0 
+	Dsp_PrimeX=-2.59378e-10 	DspPrimeY=0 
+	X[cm]=0.000    	Y[cm]=0.000    	Z[cm]=1009.803 	S[cm]=0.000    
+	tetaX[deg]=180      	tetaY[deg]=0        
+#
+begin lattice. Number of periods=1 
+oD00 
+iValve oValve oEnd 
+oD0 A2 oD1 
+oD0 A2 oD1 
+oD0 A2 oD1 
+oD0 A2 oD1 
+oEnd oValve iValve 
+oD01 
+oD02 
+qQL1D oD02a qQL1F oD02 
+oD01 
+gChicA_2 bChicA_2 
+GChicA_2 oDleg2 gChicB_2 bChicB_2 GChicB_2 oDleg2 gChicC_2 
+bChicC_2 GChicC_2 
+oD01 
+end lattice
+#
+begin list
+#
+oD0       	L[cm]=$L0    
+oD1       	L[cm]=$L1    
+oEnd       	L[cm]=$Lend    
+oValve      	L[cm]=$Lvalve    
+iValve	L[cm]=0
+#
+A2         	L[cm]=$LCav  Ncell=5  Eff_L[cm]=10  A[MeV]=$DE  Phase[deg]=$FIdeg  WaveL[cm]=$Lambda
+#
+# Chicane
+#
+gChicA_2	B[kG]=$Bchic   	Angle[deg]=0  		EffLen[cm]=$Leff0 	Tilt[deg]=0  
+bChicA_2	L[cm]=$Lbend2   	B[kG]=$Bchic  		G[kG/cm]=0        	Tilt[deg]=0
+GChicA_2	B[kG]=$Bchic   	Angle[deg]=$Ang2_deg  	EffLen[cm]=$Leff2	 	Tilt[deg]=0
+#
+gChicB_2	B[kG]=$Bchic   	Angle[deg]=$Ang2_deg  	EffLen[cm]=$Leff2	 	Tilt[deg]=0  
+bChicB_2	L[cm]=2*$Lbend2   	B[kG]=-$Bchic 		G[kG/cm]=0        	Tilt[deg]=0
+GChicB_2	B[kG]=$Bchic   	Angle[deg]=$Ang2_deg	  EffLen[cm]=$Leff2	 Tilt[deg]=0
+#
+gChicC_2	B[kG]=$Bchic	  	Angle[deg]=$Ang2_deg  	EffLen[cm]=$Leff2	 	Tilt[deg]=0  
+bChicC_2	L[cm]=$Lbend2   	B[kG]=$Bchic  		G[kG/cm]=0        	Tilt[deg]=0
+GChicC_2	B[kG]=$Bchic   	Angle[deg]=0	  	EffLen[cm]=$Leff0	 Tilt[deg]=0
+#
+#
+oDleg2	L[cm]=$Lleg2    
+#
+oD01       	L[cm]=$L01    
+oD02       	L[cm]=$L02    
+oD02a       	L[cm]=$L02a    
+oD03       	L[cm]=$L03   
+oD00       	L[cm]=$L00    
+#
+qQL1F 	L[cm]=5          	G[kG/cm]=0.0   	Tilt[deg]=0       
+qQL1D 	L[cm]=5          	G[kG/cm]=-0.0  	Tilt[deg]=0       
+#
+Xinv     	Energy increase[MeV]=0        	L[cm]=0       
+#X[cm]	Px	Y[cm]	Py	dL[cm]	dP/P
+ 1.000000e+00	 0.000000e+00	 0.000000e+00	 0.000000e+00	 0.000000e+00	 0.000000e+00	
+ 0.000000e+00	 -1.000000e+00	 0.000000e+00	 0.000000e+00	 0.000000e+00	 0.000000e+00	
+ 0.000000e+00	 0.000000e+00	 1.000000e+00	 0.000000e+00	 0.000000e+00	 0.000000e+00	
+ 0.000000e+00	 0.000000e+00	 0.000000e+00	 -1.000000e+00	 0.000000e+00	 0.000000e+00	
+ 0.000000e+00	 0.000000e+00	 0.000000e+00	 0.000000e+00	 1.000000e+00	 0.000000e+00	
+ 0.000000e+00	 0.000000e+00	 0.000000e+00	 0.000000e+00	 0.000000e+00	 1.000000e+00	
+#
+#
+end list of elements

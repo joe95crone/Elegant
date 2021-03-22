@@ -1,0 +1,112 @@
+#
+  $DipoleAA4= "gAA4 bAA4 gAA4";  =>gAA4 bAA4 gAA4
+#
+#-----------------------------------------------------------------------------------------------------------------------
+OptiM
+#
+Energy[MeV]=335.1557   Mass[MeV]=0.511006 
+Emittance: ex[cm]=1.11281e-05  ey[cm]=1.11281e-05  DP/P=0.0001 
+Initial:	BetaX[cm]=991.893 	BetaY[cm]=991.23 
+	AlfaX=-0.970867 	AlfaY=-0.964988  Qx=0  Qy=0
+	DispersX[cm]=0 	DispersY[cm]=0 
+	Dsp_PrimeX=0 	DspPrimeY=0 
+	X[cm]=0.000    	Y[cm]=0.000    	Z[cm]=0.000    	S[cm]=0.000    
+	tetaX[deg]=0        	tetaY[deg]=0        
+begin lattice. Number of periods=1 
+#
+# SPR
+#
+g4S01 
+b4S01 G4S01
+oD4S01a  
+g4S02 b4S02 g4S02  
+oD4S02a
+qQ4S01 oD4S03a qQ4S02 oD4S03b qQ4S03 
+oD4S02b  
+g4S03 b4S03 g4S03  
+oD4S01b  
+g4S04 b4S04 g4S04  
+oD4S04 
+qQ4S04 oD4S05 qQ4S05 oD4S05 qQ4S06 oD4S05 qQ4S07 
+oD4S06 
+#
+# ARC
+#
+$DipoleAA4 oD00
+ qQ4A01 oD00 qQ4A02 oD00 qQ4A03 oD00  
+$DipoleAA4   
+oD00 qQ4A00 oD00 
+$DipoleAA4 oD00
+ qQ4A04 oD00 qQ4A05 oD00 qQ4A04 oD00  
+$DipoleAA4   
+oD00 qQ4A00 oD00 
+$DipoleAA4 oD00
+ qQ4A03 oD00 qQ4A02 oD00 qQ4A01 oD00  
+$DipoleAA4   
+#
+# REC
+#
+oD4S06 qQ4S07 oD4S05 qQ4S06 oD4S05 qQ4S05 oD4S05 
+qQ4S04 oD4S04 g4S04 b4S04 g4S04 oD4S01b g4S03 
+b4S03 g4S03 oD4S02b qQ4S03 oD4S03b qQ4S02 oD4S03a 
+qQ4S01 oD4S02a g4S02 b4S02 g4S02 oD4S01a G4S01 
+b4S01 g4S01 
+#
+end lattice
+begin list
+#
+#SPR
+#
+#
+g4S01 	B[kG]=-8.659151   Angle[deg]=0  EffLen[cm]=0  Tilt[deg]=90  
+b4S01 	L[cm]=33.36916   	B[kG]=-8.659151   	G[kG/cm]=0        	Tilt[deg]=90
+G4S01 	B[kG]=-8.659151   Angle[deg]=14.7862  EffLen[cm]=2.35673  Tilt[deg]=90  
+#
+g4S02 	B[kG]=8.73174    Angle[deg]=7.39309  EffLen[cm]=2.08468  Tilt[deg]=90  
+b4S02 	L[cm]=33.09175   	B[kG]=8.73174    	G[kG/cm]=0        	Tilt[deg]=90
+#
+g4S03 	B[kG]=8.73174    Angle[deg]=7.39309  EffLen[cm]=2.08468  Tilt[deg]=90  
+b4S03 	L[cm]=33.09175   	B[kG]=-8.73174   	G[kG/cm]=0        	Tilt[deg]=90
+#
+g4S04 	B[kG]=8.73174    Angle[deg]=7.39309  EffLen[cm]=2.08468  Tilt[deg]=90  
+b4S04 	L[cm]=33.09175   	B[kG]=8.73174    	G[kG/cm]=0        	Tilt[deg]=90
+#
+#
+qQ4S01 	L[cm]=10         	G[kG/cm]=-3.23908 	Tilt[deg]=0
+qQ4S02 	L[cm]=10         	G[kG/cm]=3.571288 	Tilt[deg]=0
+#qQ4S02 	L[cm]=10         	G[kG/cm]=0 	Tilt[deg]=0
+qQ4S03 	L[cm]=10         	G[kG/cm]=-3.763697 	Tilt[deg]=0
+#
+qQ4S04 	L[cm]=10         	G[kG/cm]=-0.8411525 	Tilt[deg]=0
+qQ4S05 	L[cm]=10         	G[kG/cm]=1.034605 	Tilt[deg]=0
+qQ4S06 	L[cm]=10         	G[kG/cm]=-1.127679 	Tilt[deg]=0
+qQ4S07 	L[cm]=10         	G[kG/cm]=1.293561 	Tilt[deg]=0
+#
+oD4S01a 	L[cm]=60       
+oD4S01b 	L[cm]=49.63    
+oD4S02a 	L[cm]=50       
+oD4S02b 	L[cm]=10       
+oD4S03a 	L[cm]=26.6     
+oD4S03b 	L[cm]=21.4     
+#
+oD4S04 	L[cm]=20       
+oD4S05 	L[cm]=50       
+oD4S06 	L[cm]=23.24668 
+#
+# ARC4
+#
+gAA4 	B[kG]=8.984917   Angle[deg]=0  EffLen[cm]=2.36787  Tilt[deg]=0  
+bAA4 	L[cm]=65.24865   	B[kG]=8.984917   	G[kG/cm]=0        	Tilt[deg]=0
+#
+qQ4A00 	L[cm]=10         	G[kG/cm]=1.3125  	Tilt[deg]=0
+#
+qQ4A01 	L[cm]=10         	G[kG/cm]=-1.876815 	Tilt[deg]=0
+qQ4A02 	L[cm]=15         	G[kG/cm]=2.868259 	Tilt[deg]=0
+qQ4A03 	L[cm]=10         	G[kG/cm]=-2.497181 	Tilt[deg]=0
+#
+qQ4A04 	L[cm]=10         	G[kG/cm]=-1.985241 	Tilt[deg]=0
+qQ4A05 	L[cm]=15         	G[kG/cm]=2.760411 	Tilt[deg]=0
+#
+oD00 	L[cm]=18.61912 
+#
+end list

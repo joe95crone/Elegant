@@ -1,0 +1,610 @@
+!-----------------------------------------------------
+! OPTIM FILES (A. BOGACZ) TRANSLATED BY Y. ROBLIN
+!              April 13, 2018
+!-----------------------------------------------------
+
+"cle" ! clear whole RPN stack for safety
+
+% 1 atan 4 * sto pi
+% pi 180 / sto cdtor 
+% 180 pi / sto crtod
+% pi -2 / sto pio2
+
+W0:  watch, filename="%s.W0", mode=coord
+W1:  watch, filename="%s.W1", mode=coord
+W2:  watch, filename="%s.W2", mode=coord
+W3:  watch, filename="%s.W3", mode=coord
+W4:  watch, filename="%s.W4", mode=coord
+W5:  watch, filename="%s.W5", mode=coord
+W6:  watch, filename="%s.W6", mode=coord
+W7:  watch, filename="%s.W7", mode=coord
+W8:  watch, filename="%s.W8", mode=coord
+W9:  watch, filename="%s.W9", mode=coord
+W10: watch, filename="%s.W10",mode=coord
+W11: watch, filename="%s.W11",mode=coord
+W12: watch, filename="%s.W12",mode=coord
+W13: watch, filename="%s.W13",mode=coord
+W14: watch, filename="%s.W14",mode=coord
+W15: watch, filename="%s.W15",mode=coord
+W16: watch, filename="%s.W16",mode=coord
+W17: watch, filename="%s.W17",mode=coord
+W18: watch, filename="%s.W18",mode=coord
+W19: watch, filename="%s.W19",mode=coord
+W20: watch, filename="%s.W20",mode=coord
+W21: watch, filename="%s.W21",mode=coord
+W22: watch, filename="%s.W22",mode=coord
+W23: watch, filename="%s.W23",mode=coord
+W24: watch, filename="%s.W24",mode=coord
+W25: watch, filename="%s.W25",mode=coord
+W26: watch, filename="%s.W26",mode=coord
+W27: watch, filename="%s.W27",mode=coord
+W28: watch, filename="%s.W28",mode=coord
+W29: watch, filename="%s.W29",mode=coord
+W30: watch, filename="%s.W30",mode=coord
+W31: watch, filename="%s.W31",mode=coord
+W32: watch, filename="%s.W32",mode=coord
+W33: watch, filename="%s.W33",mode=coord
+W34: watch, filename="%s.W34",mode=coord
+
+q: charge, total=320e-12
+
+! B = 4E-11 / fraction = 20 / M = 3.33E-13 / N = 720 bins / F = 6 / R = 1500 / P = 1.08M / cut-off freq = 0.33
+
+% 720  sto bins
+% 0.33 sto cutoff0
+% 0.33 sto cutoff1
+% 1    sto sr
+% 1    sto csr
+
+! LINAC CAVITY PHASES
+
+! NL
+% 90 sto phaseA11
+% 90 sto phaseA12
+% 90 sto phaseA13
+% 90 sto phaseA14
+! SL
+% 90 sto phaseA21
+% 90 sto phaseA22
+% 90 sto phaseA23
+% 90 sto phaseA24
+
+! LINAC CAVITIES GRADIENTS
+
+% 18700000 sto gradA11
+% 18700000 sto gradA12
+% 18700000 sto gradA13
+% 18700000 sto gradA14
+
+% 18700000 sto gradA21
+% 18700000 sto gradA22
+% 18700000 sto gradA23
+% 18700000 sto gradA24
+
+A11: RFCA, L=0.9350048, VOLT="gradA11", PHASE="phaseA11", FREQ=801579826, BODY_FOCUS_MODEL="SRS", END1_FOCUS=1, END2_FOCUS=1, FIDUCIAL="TMEAN", PHASE_REFERENCE=1, CHANGE_P0=1
+A12: RFCA, L=0.9350048, VOLT="gradA12", PHASE="phaseA12", FREQ=801579826, BODY_FOCUS_MODEL="SRS", END1_FOCUS=1, END2_FOCUS=1, FIDUCIAL="TMEAN", PHASE_REFERENCE=2, CHANGE_P0=1
+A13: RFCA, L=0.9350048, VOLT="gradA13", PHASE="phaseA13", FREQ=801579826, BODY_FOCUS_MODEL="SRS", END1_FOCUS=1, END2_FOCUS=1, FIDUCIAL="TMEAN", PHASE_REFERENCE=3, CHANGE_P0=1
+A14: RFCA, L=0.9350048, VOLT="gradA14", PHASE="phaseA14", FREQ=801579826, BODY_FOCUS_MODEL="SRS", END1_FOCUS=1, END2_FOCUS=1, FIDUCIAL="TMEAN", PHASE_REFERENCE=4, CHANGE_P0=1
+
+A21: RFCA, L=0.9350048, VOLT="gradA21", PHASE="phaseA21", FREQ=801579826, BODY_FOCUS_MODEL="SRS", END1_FOCUS=1, END2_FOCUS=1, FIDUCIAL="TMEAN", PHASE_REFERENCE=5, CHANGE_P0=1
+A22: RFCA, L=0.9350048, VOLT="gradA22", PHASE="phaseA22", FREQ=801579826, BODY_FOCUS_MODEL="SRS", END1_FOCUS=1, END2_FOCUS=1, FIDUCIAL="TMEAN", PHASE_REFERENCE=6, CHANGE_P0=1
+A23: RFCA, L=0.9350048, VOLT="gradA23", PHASE="phaseA23", FREQ=801579826, BODY_FOCUS_MODEL="SRS", END1_FOCUS=1, END2_FOCUS=1, FIDUCIAL="TMEAN", PHASE_REFERENCE=7, CHANGE_P0=1
+A24: RFCA, L=0.9350048, VOLT="gradA24", PHASE="phaseA24", FREQ=801579826, BODY_FOCUS_MODEL="SRS", END1_FOCUS=1, END2_FOCUS=1, FIDUCIAL="TMEAN", PHASE_REFERENCE=8, CHANGE_P0=1
+
+TINP:   TWISS, BETAX=7.436, ALPHAX=6.49697, BETAY=11.8931, ALPHAY=5.073, ETAX=0.0133974, ETAXP=-0.57735
+IVESS:  MONITOR, L=0
+IVALVE: MONITOR, L=0.05
+
+ODLEG: CSRDRIFT, L=0.05773503, DZ=0.01, USE_STUPAKOV=1
+OD02:  CSRDRIFT, L=0.5330499, DZ=0.01, USE_STUPAKOV=1
+OD01:  CSRDRIFT, L=0.2, DZ=0.01, USE_STUPAKOV=1
+OMOD:  CSRDRIFT, L=0.2955, DZ=0.01, USE_STUPAKOV=1
+OREM:  CSRDRIFT, L=0.7587368, DZ=0.01, USE_STUPAKOV=1
+OEND:  CSRDRIFT, L=0.5700000000000001, DZ=0.01, USE_STUPAKOV=1
+	  
+BCHICA_1: CSRCSBEND, L=0.05235988, ANGLE= 0.523598817288929, E1= 0,                 E2= 0.523598775598299, HGAP=0.02, &
+          NONLINEAR=1, N_KICKS=35, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                 &
+          HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,            &
+          ISR=1, SYNCH_RAD="sr", CSR="csr"
+BCHICB_1: CSCSRBEND, L=0.10471976, ANGLE=-1.0471976,         E1=-0.523598775598299, E2=-0.523598775598299, HGAP=0.02, &
+          NONLINEAR=1, N_KICKS=70, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                 &
+          HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,            &
+          ISR=1, SYNCH_RAD="sr", CSR="csr"
+BCHICC_1: CSRCSBEND, L=0.05235988, ANGLE= 0.523598817288929, E1= 0.523598775598299, E2= 0,                 HGAP=0.02, &
+          NONLINEAR=1, N_KICKS=35, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                 &
+          HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,            &
+          ISR=1, SYNCH_RAD="sr", CSR="csr"
+
+B1S01: CSRCSBEND, L=0.2221441, ANGLE= 0.785397949169499, TILT="pio2", E1=0, E2=0.785397949169499, HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+B1S02: CSRCSBEND, L=0.2,       ANGLE=-0.785398005140952, TILT="pio2", E1=0, E2=0,                 HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+B1S03: CSRCSBEND, L=0.2,       ANGLE= 0.785398005140952, TILT="pio2", E1=0, E2=0,                 HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+B1S04: CSRCSBEND, L=0.2,       ANGLE=-0.785398005140952, TILT="pio2", E1=0, E2=0,                 HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+
+BA1:   CSRCSBEND, L=0.456,     ANGLE= 0.785398173028141,              E1=0, E2=0,                 HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+
+OSEP:    CSRDRIFT, L=0.4675024, DZ=0.01, USE_STUPAKOV=1
+OD1S01A: CSRDRIFT, L=0.27234, DZ=0.01, USE_STUPAKOV=1
+OD1S02:  CSRDRIFT, L=0.1, DZ=0.01, USE_STUPAKOV=1
+OD1S03A: CSRDRIFT, L=0.22, DZ=0.01, USE_STUPAKOV=1
+OD1S03B: CSRDRIFT, L=0.12, DZ=0.01, USE_STUPAKOV=1
+OD1S01B: CSRDRIFT, L=0.425432, DZ=0.01, USE_STUPAKOV=1
+OD1S04:  CSRDRIFT, L=0.1, DZ=0.01, USE_STUPAKOV=1
+OD1S05:  CSRDRIFT, L=0.375, DZ=0.01, USE_STUPAKOV=1
+OD1S06:  CSRDRIFT, L=0.2948913, DZ=0.01, USE_STUPAKOV=1
+OD00:    CSRDRIFT, L=0.66054, DZ=0.01, USE_STUPAKOV=1
+OD1A02:  CSRDRIFT, L=0.47815, DZ=0.01, USE_STUPAKOV=1
+ODLEG2:  CSRDRIFT, L=0.05000699, DZ=0.01, USE_STUPAKOV=1
+OD1A01:  CSRDRIFT, L=0.325, DZ=0.01, USE_STUPAKOV=1
+ODLEG3:  CSRDRIFT, L=0.05000699, DZ=0.01, USE_STUPAKOV=1
+
+QQ1S01: QUAD, L=0.1,  K1= 16.54990686026567
+QQ1S02: QUAD, L=0.1,  K1=-15.92679805558466
+QQ1S03: QUAD, L=0.1,  K1= 42.61722603568508
+QQ1S04: QUAD, L=0.1,  K1= 33.97011017851691
+QQ1S05: QUAD, L=0.1,  K1=-32.88515046259722
+QQ1S06: QUAD, L=0.1,  K1= 11.25075385365723
+QQ1S07: QUAD, L=0.1,  K1= -6.84132050369838
+QQ1A01: QUAD, L=0.1,  K1= -9.11805815948515
+QQ1A02: QUAD, L=0.15, K1= 12.69779527031353
+QQ1A03: QUAD, L=0.1,  K1= -9.58827345031445
+QQ1A04: QUAD, L=0.1,  K1=-11.93543378588018
+
+B1R04: CSRCSBEND, L=0.2,       ANGLE=-0.785398005140952, TILT="pio2", E1=0,                 E2=0, HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+B1R03: CSRCSBEND, L=0.2,       ANGLE= 0.785398005140952, TILT="pio2", E1=0,                 E2=0, HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+B1R02: CSRCSBEND, L=0.2,       ANGLE=-0.785398005140952, TILT="pio2", E1=0,                 E2=0, HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+B1R01: CSRCSBEND, L=0.2221441, ANGLE= 0.785397949169499, TILT="pio2", E1=0.785397949169499, E2=0, HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+
+BCHICA_2: CSRCSBEND, L=0.05000233, ANGLE= 0.0167154414794955, N_KICKS=20, E1= 0,                  HGAP=0.02,                E2= 0.0167154371253702, &
+          NONLINEAR=1, N_KICKS=5, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                                &
+		  HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                          &
+          ISR=1, SYNCH_RAD="sr", CSR="csr"
+BCHICB_2: CSRCSBEND, L=0.1000047,  ANGLE=-0.033430896330721,  N_KICKS=20, E1=-0.0167154371253702, HGAP=0.0200000257208371,  E2=-0.0167154371253702, &
+          NONLINEAR=1, N_KICKS=10, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                               &
+		  HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                          &
+          ISR=1, SYNCH_RAD="sr", CSR="csr"
+BCHICC_2: CSRCSBEND, L=0.05000233, ANGLE= 0.0167154414794955, N_KICKS=20, E1= 0.0167154371253702, HGAP=0.0200000257208371,  E2= 0,                  &
+          NONLINEAR=1, N_KICKS=5, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                                &                  
+		  HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                          &
+          ISR=1, SYNCH_RAD="sr", CSR="csr"
+BCHICA_3: CSRCSBEND, L=0.05000233, ANGLE= 0.0167154420832682, N_KICKS=20, E1= 0,                  HGAP=0.02,                E2= 0.0167154371253702, &
+          NONLINEAR=1, N_KICKS=5, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                                &
+		  HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                          &
+          ISR=1, SYNCH_RAD="sr", CSR="csr"
+BCHICB_3: CSRCSBEND, L=0.1000047,  ANGLE=-0.033430897538267,  N_KICKS=20, E1=-0.0167154371253702, HGAP=0.0200000257208371,  E2=-0.0167154371253702, &
+          NONLINEAR=1, N_KICKS=10, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                               &
+		  HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                          &
+          ISR=1, SYNCH_RAD="sr", CSR="csr"
+BCHICC_3: CSRCSBEND, L=0.05000233, ANGLE= 0.0167154420832682, N_KICKS=20, E1= 0.0167154371253702, HGAP=0.0200000257208371,  E2=0,                   &
+          NONLINEAR=1, N_KICKS=5, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                                &                  
+		  HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                          &
+          ISR=1, SYNCH_RAD="sr", CSR="csr"
+		  
+ARC1: LINE=(B1S01,OD1S01A,B1S02,OD1S02,QQ1S01,OD1S03A,QQ1S02,OD1S03B,QQ1S03,OD1S02,B1S03,OD1S01B,B1S04,    &
+            OD1S04,QQ1S04,OD1S05,QQ1S05,OD1S05,QQ1S06, OD1S05,QQ1S07,OD1S06,BA1,OD00,QQ1A01,OD1A01,QQ1A02, &
+			OD1A01,QQ1A03,OD00,BA1,OD1A02,QQ1A04,OD1A02,BA1,OD00,QQ1A03,OD1A01,QQ1A02,OD1A01,QQ1A01,OD00,  &
+			BA1,OD1S06,QQ1S07,OD1S05,QQ1S06,OD1S05,QQ1S05,OD1S05,QQ1S04,OD1S04,B1R04,OD1S01B,B1R03,OD1S02, &
+			QQ1S03,OD1S03B,QQ1S02,OD1S03A,QQ1S01,OD1S02,B1R02,OD1S01A,B1R01)
+
+B2S01: CSRCSBEND, L=0.3332162, ANGLE= 0.785398093905821, TILT="pio2", E1=0, E2=0.785398093905821, HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+B2S02: CSRCSBEND, L=0.3,       ANGLE=-0.785398335685877, TILT="pio2", E1=0, E2=0,                 HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+B2S03: CSRCSBEND, L=0.3,       ANGLE= 0.785398335685877, TILT="pio2", E1=0, E2=0,                 HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+B2S04: CSRCSBEND, L=0.3,       ANGLE=-0.785398335685877, TILT="pio2", E1=0, E2=0,                 HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+
+OD2S01:  CSRDRIFT, L=0.24049, DZ=0.01, USE_STUPAKOV=1
+OD2S02:  CSRDRIFT, L=0.1, DZ=0.01, USE_STUPAKOV=1
+OD2S03A: CSRDRIFT, L=0.29, DZ=0.01, USE_STUPAKOV=1
+OD2S03B: CSRDRIFT, L=0.11, DZ=0.01, USE_STUPAKOV=1
+OD2S04:  CSRDRIFT, L=0.15, DZ=0.01, USE_STUPAKOV=1
+OD2S05:  CSRDRIFT, L=0.3, DZ=0.01, USE_STUPAKOV=1
+OD2S06:  CSRDRIFT, L=0.2156113, DZ=0.01, USE_STUPAKOV=1
+OD2A01:  CSRDRIFT, L=0.325, DZ=0.01, USE_STUPAKOV=1
+OD2A02:  CSRDRIFT, L=0.47815, DZ=0.01, USE_STUPAKOV=1
+
+QQ2S01: QUAD, L=0.1,  K1= -4.27961285080023
+QQ2S02: QUAD, L=0.1,  K1= 28.66248356380401
+QQ2S03: QUAD, L=0.1,  K1= -4.74784550628368
+QQ2S04: QUAD, L=0.1,  K1= 15.59413404757474
+QQ2S05: QUAD, L=0.1,  K1=-41.99973752887341
+QQ2S06: QUAD, L=0.1,  K1= 25.17212899436472
+QQ2S07: QUAD, L=0.1,  K1=-13.59817939821477
+QQ2A01: QUAD, L=0.1,  K1= -9.49474205196289
+QQ2A02: QUAD, L=0.15, K1= 13.43290338403783
+QQ2A03: QUAD, L=0.1,  K1=-11.47675472705424
+QQ2A04: QUAD, L=0.1,  K1= -9.86357205245450
+
+BAA2:  CSRCSBEND, L=0.456,     ANGLE= 0.785398107935332,              E1=0,                 E2=0, HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+
+B2R04: CSRCSBEND, L=0.3,       ANGLE=-0.785398335685877, TILT="pio2", E1=0,                 E2=0, HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+B2R03: CSRCSBEND, L=0.3,       ANGLE= 0.785398335685877, TILT="pio2", E1=0,                 E2=0, HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+B2R02: CSRCSBEND, L=0.3,       ANGLE=-0.785398335685877, TILT="pio2", E1=0,                 E2=0, HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+B2R01: CSRCSBEND, L=0.3332162, ANGLE= 0.785398093905821, TILT="pio2", E1=0.785398093905821, E2=0, HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+
+ARC2: LINE=(B2S01,OD2S01,B2S02,OD2S02,QQ2S01,OD2S03A,QQ2S02,OD2S03B,QQ2S03,OD2S02,B2S03,      &
+			OD2S01,B2S04,OD2S04,QQ2S04,OD2S05,QQ2S05,OD2S05,QQ2S06,OD2S05,QQ2S07,OD2S06,BAA2, &
+			OD00,QQ2A01,OD2A01,QQ2A02,OD2A01,QQ2A03,OD00,BAA2,OD2A02,QQ2A04,OD2A02,BAA2,OD00, &
+			QQ2A03,OD2A01,QQ2A02,OD2A01,QQ2A01,OD00,BAA2,OD2S06,QQ2S07,OD2S05,QQ2S06,OD2S05,  &
+			QQ2S05,OD2S05,QQ2S04,OD2S04,B2R04,OD2S01,B2R03,OD2S02,QQ2S03,OD2S03B,QQ2S02,      &
+			OD2S03A,QQ2S01,OD2S02,B2R02,OD2S01,B2R01)
+
+XFRINGE3E:EMATRIX, L=0,R11=1,R12=0,R13=0,R14=0,R15=0,R16=0,R21=0.03035643557336639,R22=1,R23=0,R24=0,R25=0,R26=0,R31=0,R32=0,R33=1,R34=0,R35=0,R36=0,R41=0,R42=0,R43=0,R44=1,R45=0,R46=0,R51=0,R52=0,R53=0,R54=0,R55=1,R56=0,R61=0,R62=0,R63=0,R64=0,R65=0,R66=1
+
+XFRINGE3X:EMATRIX, L=0,R11=1,R12=0,R13=0,R14=0,R15=0,R16=0,R21=-0.2780253418915382,R22=1,R23=0,R24=0,R25=0,R26=0,R31=0,R32=0,R33=1,R34=0,R35=0,R36=0,R41=0,R42=0,R43=0.3131560919014638,R44=1,R45=0,R46=0,R51=0,R52=0,R53=0,R54=0,R55=1,R56=0,R61=0,R62=0,R63=0,R64=0,R65=0,R66=1
+
+B3S01: CSRCSBEND, L=0.2020807, ANGLE= 0.248937404666594, TILT="pio2", E1=0,                   E2= 0.248937404666594, HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=20, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                              &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                         &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+B3S02: CSRCSBEND, L=0.2005174, ANGLE=-0.248937459672887, TILT="pio2", E1=-0.124468679204751,  E2=-0.124468679204751, HGAP=0.02000003085032379, &
+       NONLINEAR=1, N_KICKS=20, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                             &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                        &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+B3S03: CSRCSBEND, L=0.2005174, ANGLE= 0.248937459672887, TILT="pio2", E1= 0.124468679204751,  E2= 0.124468679204751, HGAP=0.02000003085032379, &
+       NONLINEAR=1, N_KICKS=20, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                             &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                        &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+B3S04: CSRCSBEND, L=0.2005174, ANGLE=-0.248937459672887, TILT="pio2", E1=-0.124468679204751,  E2=-0.124468679204751, HGAP=0.02000003085032379, &
+       NONLINEAR=1, N_KICKS=20, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                             &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                        &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+
+BAA3:  CSRCSBEND, L=0.456,     ANGLE= 0.785398039031699,              E1= 0,                  E2= 0,                 HGAP=0.0290762,  &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                    &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                               &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+
+OD3S02:  CSRDRIFT, L=0.1, DZ=0.01, USE_STUPAKOV=1
+OD3S01A: CSRDRIFT, L=0.60983, DZ=0.01, USE_STUPAKOV=1
+OD3S03A: CSRDRIFT, L=0.18, DZ=0.01, USE_STUPAKOV=1
+OD3S03B: CSRDRIFT, L=0.18, DZ=0.01, USE_STUPAKOV=1
+OD3S01B: CSRDRIFT, L=0.60983, DZ=0.01, USE_STUPAKOV=1
+OD3S04:  CSRDRIFT, L=0.1, DZ=0.01, USE_STUPAKOV=1
+OD3S05:  CSRDRIFT, L=0.19, DZ=0.01, USE_STUPAKOV=1
+OD3S06:  CSRDRIFT, L=0.1395203, DZ=0.01, USE_STUPAKOV=1
+OD3A01:  CSRDRIFT, L=0.325, DZ=0.01, USE_STUPAKOV=1
+OD3A02:  CSRDRIFT, L=0.47815, DZ=0.01, USE_STUPAKOV=1
+
+QQ3S01: QUAD, L=0.1,  K1=-38.05049366267677
+QQ3S02: QUAD, L=0.1,  K1= 40.67198666323804
+QQ3S03: QUAD, L=0.1,  K1=-38.33887486709175
+QQ3S04: QUAD, L=0.1,  K1=-11.97300107811956
+QQ3S05: QUAD, L=0.1,  K1=  6.945657260604482
+QQ3S06: QUAD, L=0.1,  K1=  2.257701273282105
+QQ3S07: QUAD, L=0.1,  K1=  5.137686253635231
+QQ3A01: QUAD, L=0.1,  K1=-13.05797823450367
+QQ3A02: QUAD, L=0.15, K1= 16.2858604189025
+QQ3A03: QUAD, L=0.1,  K1=-13.11011561335132
+QQ3A04: QUAD, L=0.05, K1=-4.554827440551831
+
+B3R04: CSRCSBEND, L=0.2005174, ANGLE=-0.248937459672887, TILT="pio2", E1=-0.124468679204751, E2=-0.124468679204751, HGAP=0.02000003085032379, &
+       NONLINEAR=1, N_KICKS=20, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                            &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                       &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+B3R03: CSRCSBEND, L=0.2005174, ANGLE= 0.248937459672887, TILT="pio2", E1= 0.124468679204751, E2= 0.124468679204751, HGAP=0.02000003085032379, &
+       NONLINEAR=1, N_KICKS=20, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                            &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                       &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+B3R02: CSRCSBEND, L=0.2005174, ANGLE=-0.248937459672887, TILT="pio2", E1=-0.124468679204751, E2=-0.124468679204751, HGAP=0.02000003085032379, &
+       NONLINEAR=1, N_KICKS=20, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                            &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                       &
+       ISR=1, SYNCH_RAD="sr", CSR="csr" 
+B3R01: CSRCSBEND, L=0.2020807, ANGLE= 0.248937404666594, TILT="pio2", E1= 0.248937404666594, E2= 0,                 HGAP=0.02,                &
+       NONLINEAR=1, N_KICKS=20, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                            &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                       &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+
+ARC3: LINE=(B3S01,OD3S01A,B3S02,OD3S02,QQ3S01,OD3S03A,QQ3S02,OD3S03B,QQ3S03,OD3S02,B3S03, &
+			OD3S01B,B3S04,OD3S04,QQ3S04,OD3S05,QQ3S05,OD3S05,QQ3S06,OD3S05,QQ3S07,OD3S06, &
+			BAA3,OD00,QQ3A01,OD3A01,QQ3A02,OD3A01,QQ3A03,OD00,BAA3,OD3A02,QQ3A04,QQ3A04,  &
+			OD3A02,BAA3,OD00,QQ3A03,OD3A01,QQ3A02,OD3A01,QQ3A01,OD00,BAA3,OD3S06,QQ3S07,  &
+			OD3S05,QQ3S06,OD3S05,QQ3S05,OD3S05,QQ3S04,OD3S04,B3R04,OD3S01B,B3R03,OD3S02,  &
+			QQ3S03,OD3S03B,QQ3S02,OD3S03A,QQ3S01,OD3S02,B3R02,OD3S01A,B3R01 )
+
+BCHICA_4: CSRCSBEND, L=0.05000060000000001, ANGLE= 0.00850016568754949,              E1= 0,                   HGAP=0.02,                E2= 0.00850017233623286, &
+          NONLINEAR=1, N_KICKS=5, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                                             &
+          HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                                       &
+          ISR=1, SYNCH_RAD="sr", CSR="csr" 
+BCHICB_4: CSRCSBEND, L=0.1000012,           ANGLE=-0.017000331375099,                E1=-0.00850017233623286, HGAP=0.01999998709045556, E2=-0.00850017233623286, &
+          NONLINEAR=1, N_KICKS=10, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                                            &
+          HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                                       &
+          ISR=1, SYNCH_RAD="sr", CSR="csr"  
+BCHICC_4: CSRCSBEND, L=0.05000060000000001, ANGLE= 0.00850016568754949,              E1= 0.00850017233623286, HGAP=0.01999998709045556, E2= 0,                   &
+          NONLINEAR=1, N_KICKS=5, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                                             &
+          HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                                       &
+          ISR=1, SYNCH_RAD="sr", CSR="csr"                   
+
+B4S01: CSRCSBEND, L=0.3068733,           ANGLE= 0.36783020913341,    TILT="pio2", E1= 0,                 E2= 0.367829885187057, HGAP=0.02,                &
+       NONLINEAR=1, N_KICKS=30, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                                        &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                                   &
+       ISR=1, SYNCH_RAD="sr", CSR="csr" 
+B4S02: CSRCSBEND, L=0.3016979,           ANGLE=-0.36783028950587,    TILT="pio2", E1=-0.183915815258154, E2=-0.183915815258154, HGAP=0.01999996893416855, &
+       NONLINEAR=1, N_KICKS=30, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                                        &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                                   &
+       ISR=1, SYNCH_RAD="sr", CSR="csr" 
+
+ODLEG4:  CSRDRIFT, L=0.05000181000000001, DZ=0.01, USE_STUPAKOV=1
+OD4S01A: CSRDRIFT, L=0.38748, DZ=0.01, USE_STUPAKOV=1
+OD4S02:  CSRDRIFT, L=0.1, DZ=0.01, USE_STUPAKOV=1
+OD4S03A: CSRDRIFT, L=0.34, DZ=0.01, USE_STUPAKOV=1
+OD4S03B: CSRDRIFT, L=0.16, DZ=0.01, USE_STUPAKOV=1
+OD4S01B: CSRDRIFT, L=0.111975, DZ=0.01, USE_STUPAKOV=1
+OD4S04:  CSRDRIFT, L=0.1, DZ=0.01, USE_STUPAKOV=1
+OD4S05:  CSRDRIFT, L=0.22, DZ=0.01, USE_STUPAKOV=1
+OD4S06:  CSRDRIFT, L=0.1304753, DZ=0.01, USE_STUPAKOV=1
+OD400:   CSRDRIFT, L=0.25, DZ=0.01, USE_STUPAKOV=1
+OD4A01:  CSRDRIFT, L=0.325, DZ=0.01, USE_STUPAKOV=1
+OD4A02:  CSRDRIFT, L=0.478145, DZ=0.01, USE_STUPAKOV=1
+
+QQ4S01: QUAD, L=0.1,  K1=-23.96539708537395
+QQ4S02: QUAD, L=0.1,  K1= 30.79073733763208
+QQ4S03: QUAD, L=0.1,  K1=-41.89536480879553
+QQ4S04: QUAD, L=0.1,  K1= -8.40567908694034
+QQ4S05: QUAD, L=0.1,  K1= -7.89709780893869
+QQ4S06: QUAD, L=0.1,  K1= 19.10561079912368
+QQ4S07: QUAD, L=0.1,  K1= -8.17612677684438
+QQ4A01: QUAD, L=0.1,  K1=-15.11164878940792
+QQ4A02: QUAD, L=0.15, K1= 17.95015745380156
+QQ4A03: QUAD, L=0.1,  K1=-14.92405172390647
+QQ4A04: QUAD, L=0.05, K1=  5.55471976052408
+
+B4S03: CSRCSBEND, L=0.3016979, ANGLE= 0.36783028950587, TILT="pio2", E1= 0.183915815258154, E2= 0.183915815258154, HGAP=0.01999996893416855, &
+       NONLINEAR=1, N_KICKS=30, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+B4S04: CSRCSBEND, L=0.3016979, ANGLE=-0.36783028950587, TILT="pio2", E1=-0.183915815258154, E2=-0.183915815258154, HGAP=0.01999996893416855, &
+       NONLINEAR=1, N_KICKS=30, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+
+BAA4:  CSRCSBEND, L=0.912,     ANGLE= 0.785398179469815,             E1= 0,                 E2= 0,                 HGAP=0.0290762, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                 &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                            &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+
+B4R04: CSRCSBEND, L=0.3016979, ANGLE=-0.36783028950587, TILT="pio2", E1=-0.183915815258154, E2=-0.183915815258154, HGAP=0.01999996893416855, &
+       NONLINEAR=1, N_KICKS=30, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr" 
+B4R03: CSRCSBEND, L=0.3016979, ANGLE= 0.36783028950587, TILT="pio2", E1= 0.183915815258154, E2= 0.183915815258154, HGAP=0.01999996893416855, &
+       NONLINEAR=1, N_KICKS=30, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr", 
+B4R02: CSRCSBEND, L=0.3016979, ANGLE=-0.36783028950587, TILT="pio2", E1=-0.183915815258154, E2=-0.183915815258154, HGAP=0.01999996893416855, &
+       NONLINEAR=1, N_KICKS=30, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"
+B4R01: CSRCSBEND, L=0.3068733, ANGLE= 0.36783020913341, TILT="pio2", E1= 0.367829885187057, E2= 0,                 HGAP=0.02000000091220574, &
+       NONLINEAR=1, N_KICKS=30, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                           &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                      &
+       ISR=1, SYNCH_RAD="sr", CSR="csr" 
+
+ARC4: LINE=(B4S01,OD4S01A,B4S02,OD4S02,QQ4S01,OD4S03A,QQ4S02,OD4S03B,QQ4S03,OD4S02,B4S03, &
+			OD4S01B,B4S04,OD4S04,QQ4S04,OD4S05,QQ4S05,OD4S05,QQ4S06,OD4S05,QQ4S07,OD4S06, &
+			BAA4,OD400,QQ4A01,OD4A01,QQ4A02,OD4A01,QQ4A03,OD400,BAA4,OD4A02,QQ4A04,QQ4A04,&
+			OD4A02,BAA4,OD400,QQ4A03,OD4A01,QQ4A02,OD4A01,QQ4A01,OD400,BAA4,OD4S06,QQ4S07,&
+			OD4S05,QQ4S06,OD4S05,QQ4S05,OD4S05,QQ4S04,OD4S04,B4R04,OD4S01B,B4R03,OD4S02,  &
+			QQ4S03,OD4S03B,QQ4S02,OD4S03A,QQ4S01,OD4S02,B4R02,OD4S01A,B4R01)
+
+BCHICA_5: CSRCSBEND, L=0.05000060000000001, ANGLE= 0.00850016568754949,              E1= 0,                   HGAP=0.02,                E2= 0.00850017233623286, &
+          NONLINEAR=1, N_KICKS=5, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                                             &
+          HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                                       &
+          ISR=1, SYNCH_RAD="sr", CSR="csr" 
+BCHICB_5: CSRCSBEND, L=0.1000012,           ANGLE=-0.017000331375099,                E1=-0.00850017233623286, HGAP=0.01999998709045556, E2=-0.00850017233623286, &
+          NONLINEAR=1, N_KICKS=10, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                                            &
+          HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                                       &
+          ISR=1, SYNCH_RAD="sr", CSR="csr" 
+BCHICC_5: CSRCSBEND, L=0.05000060000000001, ANGLE= 0.00850016568754949,              E1= 0.00850017233623286, HGAP=0.01999998709045556, E2= 0,                   &
+          NONLINEAR=1, N_KICKS=5, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                                             &
+          HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                                       &
+          ISR=1, SYNCH_RAD="sr", CSR="csr" 
+B5S01:    CSRCSBEND, L=0.2007493,           ANGLE= 0.149734624452099,   TILT="pio2", E1= 0,                   HGAP=0.02,                E2= 0.149734589055397,   &
+          NONLINEAR=1, N_KICKS=15, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                                            &
+          HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                                       &
+          ISR=1, SYNCH_RAD="sr", CSR="csr" 
+
+ODLEG5: CSRDRIFT, L=0.05000181000000001, DZ=0.01, USE_STUPAKOV=1
+OD5S01: CSRDRIFT, L=0.34, DZ=0.01, USE_STUPAKOV=1
+OD5S02: CSRDRIFT, L=0.2, DZ=0.01, USE_STUPAKOV=1
+OD5S05: CSRDRIFT, L=0.58, DZ=0.01, USE_STUPAKOV=1
+OD5S06: CSRDRIFT, L=0.1788953, DZ=0.01, USE_STUPAKOV=1
+OD500:  CSRDRIFT, L=0.25, DZ=0.01, USE_STUPAKOV=1
+OD5A01: CSRDRIFT, L=0.325, DZ=0.01, USE_STUPAKOV=1
+OD5A02: CSRDRIFT, L=0.478145, DZ=0.01, USE_STUPAKOV=1
+
+QQ5S04: QUAD, L=0.1,  K1= -7.35413534048236
+QQ5S05: QUAD, L=0.1,  K1=  8.32002291251604
+QQ5S06: QUAD, L=0.1,  K1= -6.76244553814661
+QQ5S07: QUAD, L=0.1,  K1=  4.99494605557597
+QQ5A01: QUAD, L=0.1,  K1=-15.56260247047087
+QQ5A02: QUAD, L=0.15, K1= 18.50815296338374
+QQ5A03: QUAD, L=0.1,  K1=-14.81955608081265
+QQ5A04: QUAD, L=0.1,  K1=  5.68410486094983
+
+B5S02: CSRCSBEND, L=0.4014986, ANGLE=-0.299469248904198, TILT="pio2", E1=-0.149734589055397, E2=-0.149734589055397, HGAP=0.01999998573216587, &
+       NONLINEAR=1, N_KICKS=20, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                            &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                       &
+       ISR=1, SYNCH_RAD="sr", CSR="csr" 
+B5S03: CSRCSBEND, L=0.2007493, ANGLE= 0.149734624452099, TILT="pio2", E1= 0.149734589055397, E2= 0,                 HGAP=0.01999998573216587, &
+       NONLINEAR=1, N_KICKS=10, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                            &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                       &
+       ISR=1, SYNCH_RAD="sr", CSR="csr" ,          
+
+BAA5:  CSRCSBEND, L=0.912,     ANGLE= 0.785398234479906,              E1= 0,                 E2= 0,                  HGAP=0.0290762, &
+       NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                   &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                              &
+       ISR=1, SYNCH_RAD="sr", CSR="csr"             
+
+B5R03: CSRCSBEND, L=0.2007493, ANGLE= 0.149734624452099, TILT="pio2", E1= 0,                 E2= 0.149734589055397,  HGAP=0.02, &
+       NONLINEAR=1, N_KICKS=10, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                              &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                         &
+       ISR=1, SYNCH_RAD="sr", CSR="csr" 
+B5R02: CSRCSBEND, L=0.4014986, ANGLE=-0.299469248904198, TILT="pio2", E1=-0.149734589055397, E2=-0.149734589055397,  HGAP=0.01999998573216587, &
+       NONLINEAR=1, N_KICKS=20, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                             &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                        &
+       ISR=1, SYNCH_RAD="sr", CSR="csr" 
+B5R01: CSRCSBEND, L=0.2007493, ANGLE= 0.149734624452099, TILT="pio2", E1= 0.149734589055397, E2= 0,                  HGAP=0.01999998573216587, &
+       NONLINEAR=1, N_KICKS=10, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                             &
+       HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                        &
+       ISR=1, SYNCH_RAD="sr", CSR="csr" 
+
+ARC5: LINE=(B5S01,OD5S01,B5S02,OD5S01,B5S03,OD5S02,QQ5S04,OD5S05,QQ5S05,OD5S05,&
+			QQ5S06,OD5S05,QQ5S07,OD5S06,BAA5,OD500,QQ5A01,OD5A01,QQ5A02,OD5A01,&
+			QQ5A03,OD500,BAA5,OD5A02,QQ5A04,OD5A02,BAA5,OD500,QQ5A03,OD5A01,   &
+			QQ5A02,OD5A01,QQ5A01,OD500,BAA5,OD5S06,QQ5S07,OD5S05,QQ5S06,OD5S05,&
+			QQ5S05,OD5S05,QQ5S04,OD5S02,B5R03,OD5S01,B5R02,OD5S01,B5R01)
+
+BCHICA_6: CSRCSBEND, L=0.05000027000000001, ANGLE=0.00569918801979835, E1= 0,                   HGAP=0.02,                E2= 0.00569918068616976, &
+          NONLINEAR=1, N_KICKS=5, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                               &
+          HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                         &
+          ISR=1, SYNCH_RAD="sr", CSR="csr"
+BCHICB_6: CSRCSBEND, L=0.1000005,           ANGLE=-0.0113983714802709, E1=-0.00569918068616976, HGAP=0.01999997591530096, E2=-0.00569918068616976, &
+          NONLINEAR=1, N_KICKS=5, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                               &
+          HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                         &
+          ISR=1, SYNCH_RAD="sr", CSR="csr"
+BCHICC_6: CSRCSBEND, L=0.05000027000000001, ANGLE=0.00569918801979835, E1= 0.00569918068616976, HGAP=0.01999997591530096, E2= 0,                   &
+          NONLINEAR=1, N_KICKS=5, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                               &
+          HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                         &
+          ISR=1, SYNCH_RAD="sr", CSR="csr"
+
+6S01: CSRCSBEND, L=0.3029852, ANGLE= 0.24349955205274, TILT="pio2", E1= 0,                 E2= 0.243499610591989, HGAP=0.02,                &
+      NONLINEAR=1, N_KICKS=15, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                           &
+      HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                      &
+      ISR=1, SYNCH_RAD="sr", CSR="csr" 
+6S02: CSRCSBEND, L=0.3029852, ANGLE=-0.24349955205274, TILT="pio2", E1=-0.243499610591989, E2= 0,                 HGAP=0.01999995647918461, &
+      NONLINEAR=1, N_KICKS=15, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                           &
+      HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                      &
+      ISR=1, SYNCH_RAD="sr", CSR="csr" 
+6S03: CSRCSBEND, L=0.3029852, ANGLE=-0.24349955205274, TILT="pio2", E1= 0,                 E2=-0.243499610591989, HGAP=0.02,                &
+      NONLINEAR=1, N_KICKS=15, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                           &
+      HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                      &
+      ISR=1, SYNCH_RAD="sr", CSR="csr" 
+6S04: CSRCSBEND, L=0.3029852, ANGLE= 0.24349955205274, TILT="pio2", E1= 0.243499610591989, E2= 0,                 HGAP=0.01999995647918461, &
+      NONLINEAR=1, N_KICKS=15, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                           &
+      HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                      &
+      ISR=1, SYNCH_RAD="sr", CSR="csr" 
+
+AA6:  CSRCSBEND, L=0.912,     ANGLE= 0.785398078703161,             E1= 0,                 E2= 0,                 HGAP=0.0290762,           &
+      NONLINEAR=1, N_KICKS=50, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                           &
+      HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                      &
+      ISR=1, SYNCH_RAD="sr", CSR="csr" 
+
+6R04: CSRCSBEND, L=0.3029852, ANGLE= 0.24349955205274, TILT="pio2", E1= 0,                 E2= 0.243499610591989, HGAP=0.02,                &
+      NONLINEAR=1, N_KICKS=20, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                           &
+      HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                      &
+      ISR=1, SYNCH_RAD="sr", CSR="csr" 
+6R03: CSRCSBEND, L=0.3029852, ANGLE=-0.24349955205274, TILT="pio2", E1=-0.243499610591989, E2= 0,                 HGAP=0.01999995647918461, &
+      NONLINEAR=1, N_KICKS=20, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                           &
+      HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                      &
+      ISR=1, SYNCH_RAD="sr", CSR="csr" 
+6R02: CSRCSBEND, L=0.3029852, ANGLE=-0.24349955205274, TILT="pio2", E1= 0,                 E2=-0.243499610591989, HGAP=0.02,                &
+      NONLINEAR=1, N_KICKS=20, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                           &
+      HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                      &
+      ISR=1, SYNCH_RAD="sr", CSR="csr" 
+6R01: CSRCSBEND, L=0.3029852, ANGLE= 0.24349955205274, TILT="pio2", E1= 0.243499610591989, E2= 0,                 HGAP=0.01999995647918461, &
+      NONLINEAR=1, N_KICKS=20, INTEGRATION_ORDER=4, EDGE_ORDER=2,                                                                           &
+      HIGH_FREQUENCY_CUTOFF0="cutoff0", HIGH_FREQUENCY_CUTOFF1="cutoff1", BINS="bins", SG_HALFWIDTH=1,                                      &
+      ISR=1, SYNCH_RAD="sr", CSR="csr" 
+
+ODLEG6:CSRDRIFT, L=0.05000081, DZ=0.01, USE_STUPAKOV=1
+D6S01: CSRDRIFT, L=0.12, DZ=0.01, USE_STUPAKOV=1
+D6S02: CSRDRIFT, L=0.1, DZ=0.01, USE_STUPAKOV=1
+D6S04: CSRDRIFT, L=0.2, DZ=0.01, USE_STUPAKOV=1
+D6S05: CSRDRIFT, L=0.5600000000000001, DZ=0.01, USE_STUPAKOV=1
+D6S06: CSRDRIFT, L=0.2634558, DZ=0.01, USE_STUPAKOV=1
+D00:   CSRDRIFT, L=0.25, DZ=0.01, USE_STUPAKOV=1
+D6A01: CSRDRIFT, L=0.325, DZ=0.01, USE_STUPAKOV=1
+D6A02: CSRDRIFT, L=0.478145, DZ=0.01, USE_STUPAKOV=1
+
+Q6S04: QUAD, L=0.1,  K1=  0.65659805679173
+Q6S05: QUAD, L=0.1,  K1= -5.91554146705081
+Q6S06: QUAD, L=0.1,  K1= -3.76975184594063
+Q6S07: QUAD, L=0.1,  K1= 13.45839174289573
+Q6A01: QUAD, L=0.1,  K1=-15.53946775409657
+Q6A02: QUAD, L=0.15, K1= 18.41894968569912
+Q6A03: QUAD, L=0.1,  K1=-14.81977391113481
+Q6A04: QUAD, L=0.05, K1=  5.72927184506678
+
+ARC6: LINE=(6S01,D6S01,6S02,D6S02,6S03,D6S01,6S04,D6S04,Q6S04,D6S05,Q6S05,D6S05,Q6S06,D6S05,Q6S07,&
+			D6S06,AA6,D00,Q6A01,D6A01,Q6A02,D6A01,Q6A03,D00,AA6,D6A02,Q6A04,Q6A04,D6A02,AA6,      &
+			D00,Q6A03,D6A01,Q6A02,D6A01,Q6A01,D00,AA6,D6S06,Q6S07,D6S05,Q6S06,D6S05,Q6S05,        &
+			D6S05,Q6S04,D6S04,6R04,D6S01,6R03,D6S02,6R02,D6S01,6R01)
+
+CHICINJ:  LINE=(BCHICC_1)
+CHICANE2: LINE=(BCHICA_2,ODLEG2,BCHICB_2,ODLEG2,BCHICC_2,OD02)
+CHICANE3: LINE=(OD02,BCHICA_3,ODLEG3,BCHICB_3,ODLEG3,BCHICC_3)
+CHICANE4: LINE=(BCHICA_4,ODLEG4,BCHICB_4,ODLEG4,BCHICC_4,OD02)
+CHICANE5: LINE=(OD02,BCHICA_5,ODLEG5,BCHICB_5,ODLEG5,BCHICC_5)
+CHICANE6: LINE=(BCHICA_6,ODLEG6,BCHICB_6,ODLEG6,BCHICC_6,OD02)
+
+NL:  LINE=(OD01,OMOD,IVESS,OREM,IVALVE,OEND,A11,OSEP,A12,OSEP,A13,OSEP,A14,OEND,IVALVE,OREM,IVESS,OMOD,OD01)
+SL:  LINE=(OD01,OMOD,IVESS,OREM,IVALVE,OEND,A21,OSEP,A22,OSEP,A23,OSEP,A24,OEND,IVALVE,OREM,IVESS,OMOD,OD01)
+
+DUMP: WATCH,filename="dump.sdds"
+
+! START	AT LINAC ENTRANCE TO AVOID HAVING REMNANT DISPERSION FROM CHICANEINJ
+ALL: LINE=(q,      W0, W1, NL,W2, ARC1,W3, SL,W4, CHICANE2, W5,ARC2, W6, &
+              CHICANE3,W7, NL,W8, ARC3,W9, SL,W10,CHICANE4,W11,ARC4,W12, &
+			  CHICANE5,W13,NL,W14,ARC5,W15,SL,W16,CHICANE6,W17,ARC6,W18, &
+		      CHICANE6,W19,NL,W20,ARC5,W21,SL,W22,CHICANE5,W23,ARC4,W24, &
+			  CHICANE4,W25,NL,W26,ARC3,W27,SL,W28,CHICANE3,W29,ARC2,W30, &
+			  CHICANE2,W31,NL,W32,ARC1,W33,SL,W34)
+
+!ALL: LINE=(W0,CHICINJ, W1, NL,W2, ARC1,W3, SL,W4, CHICANE2,W5, ARC2,W6,  &
+!              CHICANE3,W7, NL,W8, ARC3,W9, SL,W10,CHICANE4,W11,ARC4,W12, &
+!			   CHICANE5,W13,NL,W14,ARC5,W15,SL,W16,CHICANE6,W17,ARC6,W18, &
+!		       CHICANE6,W19,NL,W20,ARC5,W21,SL,W22,CHICANE5,W23,ARC4,W24, &
+!			   CHICANE4,W25,NL,W26,ARC3,W27,SL,W28,CHICANE3,W29,ARC2,W30, &
+!			   CHICANE2,W31,NL,W32,ARC1,W33,SL,W34)

@@ -1,0 +1,38 @@
+&run_setup
+		lattice = M_01.lte
+		default_order = 2
+		use_beamline = test
+		p_central = 200
+		sigma = %s.sig
+		centroid = %s.cen
+		output = %s.out
+		final = %s.fin
+		magnets = %s.mag
+		parameters = %s.param
+		random_number_seed = 987654321
+		print_statistics = 1
+&end
+
+&run_control
+		n_steps = 1
+&end
+
+&twiss_output
+	filename = "%s.twi", 
+	output_at_each_step = 1
+	matched = 0,
+	beta_x = 5.73409, alpha_x = -1.74977,
+	beta_y = 5.54673, alpha_y =  1.67146,
+&end
+
+&bunched_beam
+		bunch = %s.bun
+		n_particles_per_bunch = 1000
+		emit_nx = 1e-6
+		emit_ny = 1e-6
+		Po = 200
+		sigma_dp = 0
+		use_twiss_command_values=1
+&end
+
+&track &end

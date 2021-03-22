@@ -1,0 +1,19 @@
+SDDS1
+!# little-endian
+&description text="centroid output--input: PERLE_all.ele  lattice: PERLE_all_csrcsbend_csrdrift.lte", contents="centroid output", &end
+&parameter name=Step, description="Simulation step", type=long, &end
+&parameter name=SVNVersion, description="SVN version number", type=string, fixed_value=unknown, &end
+&column name=s, units=m, description=Distance, type=double,  &end
+&column name=ElementName, description="Element name", format_string=%10s, type=string,  &end
+&column name=ElementOccurence, description="Occurence of element", format_string=%6ld, type=long,  &end
+&column name=ElementType, description="Element-type name", format_string=%10s, type=string,  &end
+&column name=Cx, symbol=<x>, units=m, description="x centroid", type=double,  &end
+&column name=Cxp, symbol=<x'>, description="x' centroid", type=double,  &end
+&column name=Cy, symbol=<y>, units=m, description="y centroid", type=double,  &end
+&column name=Cyp, symbol=<y'>, description="y' centroid", type=double,  &end
+&column name=Cs, symbol=<s>, units=m, description="mean distance traveled", type=double,  &end
+&column name=Cdelta, symbol="<$gd$r>", description="delta centroid", type=double,  &end
+&column name=Particles, description="Number of particles", type=long,  &end
+&column name=pCentral, symbol="p$bcen$n", units="m$be$nc", description="Reference beta*gamma", type=double,  &end
+&column name=Charge, units=C, description="Charge in the beam", type=double,  &end
+&data mode=binary, &end

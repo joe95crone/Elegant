@@ -1,0 +1,49 @@
+!TITLE Converted from MAIN: - M:\casa\acc_phys\bogacz\CERN RLA\TF  2014\Linac_1_Step_3.opt.  Tue Jul 24 15:19:35 2018
+
+!  Kinetic energy=5 MeV, mass=0.511003 MeV
+!  BetaX=0.6328 m,  AlphaX=-1.731,  BetaY=0.6328 m,  AlphaY=-1.731 
+!  DispX=0 m,  DispPX=0,  DispY=0 m,  DispPY=0 
+
+OPTION, -INTER, -ECHO
+ASSIGN, PRINT="line_out.dat"
+ASSIGN, ECHO="line_echo.txt"
+
+Cry: DRIFT, L=0.3224976016 
+A1: LCAV, L=0.9350047968, DELTAE=18.75058619, PHI0=         0, FREQ= 801580000
+chic1: SBEND,  L=0.202303032,  ANGLE=0.009404044242
+chic2: SBEND,  L=0.202303032,  ANGLE=-0.01880808848
+chic3: SBEND,  L=0.202303032,  ANGLE=0.009404044242
+Dchic1: DRIFT, L=      0.25 
+Dchic2: DRIFT, L=      0.25 
+inv: MATRIX, & 
+R11=       100 ,  R12=         0 ,  R13=         0 ,  R14=         0 ,  R15=         0 ,  R16=         0 ,   & 
+R21=         0 ,  R22=        -1 ,  R23=         0 ,  R24=         0 ,  R25=         0 ,  R26=         0 ,   & 
+R31=         0 ,  R32=         0 ,  R33=       100 ,  R34=         0 ,  R35=         0 ,  R36=         0 ,   & 
+R41=         0 ,  R42=         0 ,  R43=         0 ,  R44=        -1 ,  R45=         0 ,  R46=         0 ,   & 
+R51=         0 ,  R52=         0 ,  R53=         0 ,  R54=         0 ,  R55=       100 ,  R56=         0 ,   & 
+R61=         0 ,  R62=         0 ,  R63=         0 ,  R64=         0 ,  R65=         0 ,  R66=         1 
+
+MACHINE: LINE=(Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry,  &
+Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry, inv, Cry, A1, Cry,  &
+Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry, Cry,  &
+A1, Cry, Cry, A1, Cry, chic1, Dchic1, chic2, Dchic2, chic3, Cry, inv, Cry,  &
+chic1, Dchic1, chic2, Dchic2, chic3, Cry, A1, Cry, Cry, A1, Cry, Cry, A1,  &
+Cry, Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry,  &
+inv, Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry,  &
+Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry, chic1, Dchic1, chic2, Dchic2,  &
+chic3, Cry, inv, Cry, chic1, Dchic1, chic2, Dchic2, chic3, Cry, A1, Cry,  &
+Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry, Cry,  &
+A1, Cry, Cry, A1, Cry, inv, Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry, Cry,  &
+A1, Cry, Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry, Cry, A1, Cry, chic1,  &
+Dchic1, chic2, Dchic2, chic3, Cry, inv)
+
+use,machine
+
+twiss energy=0.0055110034, couple, betx=    0.6328, alfx=    -1.731, &
+     bety=    0.6328, alfy=    -1.731, &
+     dx=         0, dpx=         0, &
+     dy=         0, dpy=         0, TAPE=line.twiss 
+
+survey,
+
+stop

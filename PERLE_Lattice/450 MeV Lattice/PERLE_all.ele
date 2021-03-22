@@ -1,0 +1,67 @@
+
+&run_setup
+	lattice="PERLE_all_csrcsbend_csrdrift.lte",
+	use_beamline="ALL",
+	p_central_mev=5.1748313678021,
+	final=output/%s.fin
+	parameters=output/%s.param
+	magnets=output/%s.mgn,
+	centroid=output/%s.cen
+	sigma=output/%s.sig
+&end
+
+!ENTRANCE TO NL (FIRST PASS)
+&twiss_output
+	filename=output/%s.twi,
+	matched=0,radiation_integrals=1,
+	beta_x=5.744919623630443, alpha_x=4.374434042704115,
+	beta_y=5.853397720505042, alpha_y=4.446496385232932,
+&end
+
+! ENTRANCE TO CHICINJ
+!&twiss_output
+	filename=output/%s.twi,
+	matched=0,radiation_integrals=1,
+	eta_x= 0.0133974, etap_x=-0.57735,
+	beta_x=4.696289,  alpha_x=4.57679,
+	beta_y=7.68667,   alpha_y=0.303494,
+!&end
+
+&matrix_output
+    SDDS_output = output/%s.mpr
+    SDDS_output_order = 2
+    output_at_each_step = 1
+&end
+
+&floor_coordinates
+    filename = output/%s.flr
+&end
+
+!&alter_elements name=A1? item=LOCK_PHASE value=1 &end
+!&alter_elements name=A2? item=LOCK_PHASE value=1 &end
+
+&run_control 
+	n_steps=1
+	first_is_fiducial = 1
+&end
+
+!&bunched_beam 
+	n_particles_per_bunch = 1
+	use_twiss_command_values = 1
+	emit_nx = 6E-06,
+    emit_ny = 6E-06,
+	! 6.67 ps x 10 keV at 5 MeV/c
+	sigma_dp = 2.00E-03 
+    sigma_s  = 2.00E-03
+	momentum_chirp = 0
+	distribution_cutoff[0] = 6,6,2
+	enforce_rms_values[0] =  1,1,1
+!&end
+
+&sdds_beam
+	!input=NL_ENTRANCE_100K_uniform_flattop.bun
+	!sample_interval=100
+&end
+
+&track
+&end

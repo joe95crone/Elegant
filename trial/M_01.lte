@@ -1,0 +1,11 @@
+Q1:	quad, L=0.1, K1=2
+Q2:	quad, L=0.1, K1=-4
+Q3:	quad, L=0.1, K1=2
+Q4:	quad, L=0.1, K1=0
+
+DS1:		drift, L=0.4
+DS2: 	drift, L=1.0
+
+B1: 	sbend, L=0.6, angle="pi 6 /"
+
+test: line=(DS1, Q1, DS1, Q2, DS1, Q3, DS1, Q4, DS1, B1, DS2)

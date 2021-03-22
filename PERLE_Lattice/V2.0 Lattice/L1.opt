@@ -1,0 +1,167 @@
+ (500-7)/6;  =>  82.1666667
+  $DE= (500-7)/6/4;  =>  20.5416667
+# Inj
+  $E0=7.0;  =>           7
+  $T0=$E0-$Me;  =>   6.4889966
+  $P0=sqrt($E0*$E0-$Me*$Me);  =>  6.98132334
+  $Hr=$P0*1e11/$c;  =>   23.287188
+#
+  $gamma=1+$E0/$Me;  =>   14.698539
+  $beta=sqrt(1-1/$gamma/$gamma);  => 0.997683005
+ #
+  $EmitN=1e-4;  =>      0.0001
+  $Emit=$EmitN/$gamma/$beta;  =>6.81919731e-06
+#
+# Main cavity parameters
+#
+ $c;  =>2.99792458e+10
+ $F=801.58e6;  =>   801580000
+  $Lambda=$c/$F;  =>  37.4001919
+  $LCav=5*$Lambda/2;  =>  93.5004797
+  $Grad = $DE/$LCav*100;  =>  21.9695843
+#
+  4*$DE;  =>  82.1666667
+  $E0+1*4*$DE;  =>  89.1666667
+  $E0+2*4*$DE;  =>  171.333333
+  $E0+3*4*$DE;  =>       253.5
+  $E0+4*4*$DE;  =>  335.666667
+  $E0+5*4*$DE;  =>  417.833333
+  $E0+6*4*$DE;  =>         500
+#
+     7;  =>           7
+   89;  =>          89
+  171;  =>         171
+  253;  =>         253
+  335;  =>         335
+  418;  =>         418
+  500;  =>         500
+#
+  4*$DE-$Me;  =>  81.6556633
+  $E0+1*4*$DE-$Me;  =>  88.6556633
+  $E0+2*4*$DE-$Me;  =>   170.82233
+  $E0+3*4*$DE-$Me;  =>  252.988997
+  $E0+4*4*$DE-$Me;  =>  335.155663
+  $E0+5*4*$DE-$Me;  =>   417.32233
+  $E0+6*4*$DE-$Me;  =>  499.488997
+#
+$Lper = 149.05;  =>      149.05
+#
+$L0=54.954 - $LCav/2;  =>  8.20376016
+$L1=$Lper -$L0 - $LCav;  =>  47.3457602
+#
+$Lend=201.05 - $Lper;  =>          52
+$Lvalve=78.4-$Lend;  =>        26.4
+#
+$Lcryo=753.0;  =>         753
+#
+$Cav="oD1 A1 oD0";
+#
+  $FIdeg=0;  =>           0
+# 
+#
+#
+#
+# re-injection Chicane 
+ #
+ $Ang_deg= 15.;  =>          15
+  $Ang_rad=$Ang_deg*$PI/180;  => 0.261799388
+  $Lmag=15;  =>          15
+  $Lchic=80;  =>          80
+  $HalfGap=0..5*2.54/2;  =>           0
+#
+ $Lbend=$Lmag*$Ang_rad/sin($Ang_rad);  =>  15.1727274
+#  $Lbend=$Lmag;  =>          15
+  $Bchic=  $Ang_rad* $Hr/$Lbend;  => 0.401811184
+#
+asin($Bchic*$Lmag/$Hr);  => 0.261799388
+#
+  $Leff_0=$HalfGap;  =>           0
+  $Leff=$HalfGap*(1.+sin( $Ang_rad)*sin( $Ang_rad))/(cos($Ang_rad)*cos( $Ang_rad)*cos( $Ang_rad)) ;  =>           0
+#
+# drift
+$Lstr= ($Lchic-4*$Lmag)/2;  =>          10
+$Lleg=$Lstr/cos($Ang_rad);  =>  10.3527618
+#
+#
+$L01=20;  =>          20
+$L02=30;  =>          30
+$L02a=15;  =>          15
+$L03=25;  =>          25
+$L00=(27-26.1496519)*$Lambda;  =>  31.8031821
+#
+#
+  $FIdeg=0;  =>           0
+# 
+$BetaX=         450;  =>         450
+$BetaY=         480;  =>         480
+#
+$AlfaX=         3.4;  =>         3.4
+$AlfaY=        1.34;  =>        1.34
+#
+OptiM
+Energy[MeV]=$T0       Mass[MeV]=$Me 
+Emittance: ex[cm]=$Emit  ey[cm]=$Emit  DP/P=1e-4
+Initial:	BetaX[cm]=1264.89 	BetaY[cm]=1349.23 
+	AlfaX=6.19228 		AlfaY=-0.0652752 
+	DispX[cm]=1.97479 	DispY[cm]=0
+	DispPrX=-0.267949 	DispPrY=0
+	X[cm]=0.000    	Y[cm]=0.000    	Z[cm]=0.000    	S[cm]=0.000    
+	tetaX[deg]=0        	tetaY[deg]=0        
+#
+begin lattice. Number of periods=1 
+#
+gChicC_1 bChicC_1 GChicC_1
+# 
+oD01
+#
+oD02 qQL1F oD02a qQL1D oD02
+#
+#
+oD01
+#
+iValve oValve oEnd $Cav $Cav $Cav $Cav oEnd oValve iValve
+#
+oD00
+#
+end lattice
+#
+begin list
+#
+oD0       	L[cm]=$L0    
+oD1       	L[cm]=$L1    
+oEnd       	L[cm]=$Lend    
+oValve      	L[cm]=$Lvalve    
+iValve	L[cm]=0
+#
+A1         	L[cm]=$LCav  Ncell=5  Eff_L[cm]=10  A[MeV]=$DE  Phase[deg]=$FIdeg  WaveL[cm]=$Lambda
+#
+# Chicane
+#
+gChicA_1	B[kG]=$Bchic   	Angle[deg]=0  		EffLen[cm]=$Leff_0 	Tilt[deg]=0  
+bChicA_1	L[cm]=$Lbend   	B[kG]=$Bchic  		G[kG/cm]=0        	Tilt[deg]=0
+GChicA_1	B[kG]=$Bchic   	Angle[deg]=$Ang_deg  	EffLen[cm]=$Leff	 	Tilt[deg]=0
+#
+gChicB_1	B[kG]=$Bchic   	Angle[deg]=$Ang_deg  	EffLen[cm]=$Leff	 	Tilt[deg]=0  
+bChicB_1	L[cm]=2*$Lbend   	B[kG]=-$Bchic  		G[kG/cm]=0        	Tilt[deg]=0
+GChicB_1	B[kG]=$Bchic   	Angle[deg]=$Ang_deg	  EffLen[cm]=$Leff	 Tilt[deg]=0
+#
+gChicC_1	B[kG]=$Bchic   	Angle[deg]=$Ang_deg  	EffLen[cm]=$Leff	 	Tilt[deg]=0  
+bChicC_1	L[cm]=$Lbend   	B[kG]=$Bchic  		G[kG/cm]=0        	Tilt[deg]=0
+GChicC_1	B[kG]=$Bchic   	Angle[deg]=0	  	EffLen[cm]=$Leff_0	 Tilt[deg]=0
+#
+#
+oDleg	L[cm]=$Lleg    
+#
+#
+oD01       	L[cm]=$L01    
+oD02       	L[cm]=$L02    
+oD02a       	L[cm]=$L02a    
+oD03       	L[cm]=$L03   
+oD00       	L[cm]=$L00    
+#
+qQL1F 	L[cm]=5          	G[kG/cm]=0    	Tilt[deg]=0
+qQL1D 	L[cm]=5          	G[kG/cm]=-0  	Tilt[deg]=0
+#
+#
+#
+end list of elements
